@@ -23,20 +23,7 @@ stop() ->
 loop(Req, DocRoot) ->
     "/" ++ Path = Req:get(path),
     try
-        case Req:get(method) of
-            Method when Method =:= 'GET'; Method =:= 'HEAD' ->
-                case Path of
-                    _ ->
-                        Req:serve_file(Path, DocRoot)
-                end;
-            'POST' ->
-                case Path of
-                    _ ->
-                        Req:not_found()
-                end;
-            _ ->
-                Req:respond({501, [], []})
-        end
+      erlx_router:dispatch(Req, DocRoot, Path)
     catch
         Type:What ->
             Report = ["web request failed",
