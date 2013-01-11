@@ -21,10 +21,12 @@ ensure_started(App) ->
 start() ->
     erlx_deps:ensure(),
     ensure_started(crypto),
+    application:start(mongodb),
     application:start(erlx).
 
 
 %% @spec stop() -> ok
 %% @doc Stop the erlx server.
 stop() ->
+    application:stop(mongodb),
     application:stop(erlx).
