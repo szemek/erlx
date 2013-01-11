@@ -47,9 +47,9 @@ init([]) ->
     {ok,
      {Strategy, lists:flatten(Processes)}}.
 
-web_specs(Mod, Port) ->
+web_specs(Mod, _) ->
     WebConfig = [{ip, {0,0,0,0}},
-                 {port, Port},
+                 {port, list_to_integer(os:getenv("PORT"))},
                  {docroot, erlx_deps:local_path(["priv", "www"])}],
     {Mod,
      {Mod, start, [WebConfig]},
