@@ -17,40 +17,42 @@
 %% @spec start_link() -> ServerRet
 %% @doc API for starting the supervisor.
 start_link() ->
-    supervisor:start_link({local, ?MODULE}, ?MODULE, []).
+  supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 %% @spec upgrade() -> ok
 %% @doc Add processes if necessary.
 upgrade() ->
-    {ok, {_, Specs}} = init([]),
+  {ok, {_, Specs}} = init([]),
 
-    Old = sets:from_list(
-            [Name || {Name, _, _, _} <- supervisor:which_children(?MODULE)]),
-    New = sets:from_list([Name || {Name, _, _, _, _, _} <- Specs]),
-    Kill = sets:subtract(Old, New),
+  Old = sets:from_list(
+    [Name || {Name, _, _, _} <- supervisor:which_children(?MODULE)]),
+  New = sets:from_list([Name || {Name, _, _, _, _, _} <- Specs]),
+  Kill = sets:subtract(Old, New),
 
-    sets:fold(fun (Id, ok) ->
-                      supervisor:terminate_child(?MODULE, Id),
-                      supervisor:delete_child(?MODULE, Id),
-                      ok
-              end, ok, Kill),
+  sets:fold(fun (Id, ok) ->
+        supervisor:terminate_child(?MODULE, Id),
+        supervisor:delete_child(?MODULE, Id),
+        ok
+    end, ok, Kill),
 
-    [supervisor:start_child(?MODULE, Spec) || Spec <- Specs],
-    ok.
+  [supervisor:start_child(?MODULE, Spec) || Spec <- Specs],
+  ok.
 
 %% @spec init([]) -> SupervisorTree
 %% @doc supervisor callback.
 init([]) ->
-    Web = web_specs(erlx_web, list_to_integer(os:getenv("PORT"))),
-    Processes = [Web],
-    Strategy = {one_for_one, 10, 10},
-    {ok,
-     {Strategy, lists:flatten(Processes)}}.
-
-web_specs(Mod, _) ->
-    WebConfig = [{ip, {0,0,0,0}},
-                 {port, list_to_integer(os:getenv("PORT"))},
-                 {docroot, erlx_deps:local_path(["priv", "www"])}],
-    {Mod,
-     {Mod, start, [WebConfig]},
-     permanent, 5000, worker, dynamic}.
+  Port = case os:getenv("PORT") of
+    false -> 3000;
+    AnyPort -> AnyPort
+  end,
+  Mod = erlx_web,
+  WebConfig = [{ip, {0,0,0,0}},
+    {port, Port},
+    {docroot, erlx_deps:local_path(["priv", "www"])}],
+  Web = {Mod,
+    {Mod, start, [WebConfig]},
+    permanent, 5000, worker, dynamic},
+  Processes = [Web],
+  Strategy = {one_for_one, 10, 10},
+  {ok,
+    {Strategy, lists:flatten(Processes)}}.
