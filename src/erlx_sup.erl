@@ -41,7 +41,7 @@ upgrade() ->
 %% @spec init([]) -> SupervisorTree
 %% @doc supervisor callback.
 init([]) ->
-    Web = web_specs(erlx_web, 8080),
+    Web = web_specs(erlx_web, list_to_integer(os:getenv("PORT"))),
     Processes = [Web],
     Strategy = {one_for_one, 10, 10},
     {ok,
