@@ -5,6 +5,6 @@
     <title>Erlx</title>
   </head>
   <body>
-    Erlx is running.
+  {% block content %}{% endblock %}
   </body>
 </html>
