@@ -1,0 +1,9 @@
+%% -*- erlang -*-
+{application, erlx,
+ [{description, "erlx"},
+  {vsn, "0.1"},
+  {modules, []},
+  {registered, []},
+  {mod, {'erlx_app', []}},
+  {env, []},
+  {applications, [kernel, stdlib, crypto]}]}.
