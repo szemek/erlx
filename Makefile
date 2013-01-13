@@ -4,6 +4,9 @@ DEST:=$(PREFIX)$(PROJECT)
 
 REBAR=./rebar
 
+compile:
+	@$(REBAR) --config rebar.light.config compile
+
 all:
 	@$(REBAR) get-deps compile
 
