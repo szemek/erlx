@@ -1,5 +1,10 @@
 {% extends "layouts/main.dtl" %}
 
-{% block content %}
-  Erlx is running.
+{% block sidebar1 %}
+{% endblock %}
+
+{% block sidebar2 %}
+{% endblock %}
+
+{% block main %}
 {% endblock %}
