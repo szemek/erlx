@@ -1,0 +1,10 @@
+{% extends "layouts/main.dtl" %}
+
+{% block sidebar1 %}
+{% endblock %}
+
+{% block sidebar2 %}
+{% endblock %}
+
+{% block main %}
+{% endblock %}

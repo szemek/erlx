@@ -2,10 +2,12 @@
 -export([dispatch/3]).
 
 dispatch(Req, DocRoot, Path) ->
-  [Controller | Action] = re:split(Path, "/", [{return, list}]),
-  case Controller of
+  [Module | Function] = re:split(Path, "/", [{return, list}]),
+  case Module of
     "" ->
       main_controller:index(Req);
+    "css" ->
+      Req:serve_file(Path, DocRoot);
     _ ->
-      Req:serve_file(Path, DocRoot)
+      functions_controller:show(Req, Module, Function)
   end.
