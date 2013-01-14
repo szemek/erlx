@@ -39,3 +39,7 @@ header h1 {
   float: left;
   width: 60%;
 }
+
+input[type=submit] {
+  display: block;
+}

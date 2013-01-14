@@ -1,0 +1,14 @@
+{% extends "layouts/main.dtl" %}
+
+{% block sidebar1 %}
+{% endblock %}
+
+{% block sidebar2 %}
+{% endblock %}
+
+{% block main %}
+  <form action="/eval/exec" method="post" accept-charset="utf-8">
+    <textarea name="string" id= rows="8" cols="40"></textarea>
+    <input type="submit" />
+  </form>
+{% endblock %}
