@@ -1,5 +1,9 @@
 {% extends "layouts/main.dtl" %}
 
+{% block head %}
+  <script src="/js/eval.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
 {% block sidebar1 %}
 {% endblock %}
 
@@ -7,8 +11,12 @@
 {% endblock %}
 
 {% block main %}
-  <form action="/eval/exec" method="post" accept-charset="utf-8">
+  <form id='eval' action="/eval/exec" method="post" accept-charset="utf-8">
     <textarea name="string" id= rows="8" cols="40"></textarea>
     <input type="submit" />
   </form>
+
+  <div id='result'>
+  </div>
+
 {% endblock %}
