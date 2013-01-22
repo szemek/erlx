@@ -7,6 +7,6 @@ index(Req) ->
 
 exec(Req) ->
   PostData = Req:parse_post(),
-  String = proplists:get_value("string", PostData),
+  String = proplists:get_value("code", PostData),
   Eval = lists:flatten(io_lib:write(eval:exec(String))),
   Req:respond({200, [{"Content-Type", "text/plain"}], Eval}).

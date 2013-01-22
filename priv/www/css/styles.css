@@ -37,9 +37,13 @@ header h1 {
 
 .main {
   float: left;
-  width: 60%;
+  width: 100%;
 }
 
 input[type=submit] {
   display: block;
+}
+
+#eval {
+  padding: 10px;
 }

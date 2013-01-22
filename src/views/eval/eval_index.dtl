@@ -1,6 +1,9 @@
 {% extends "layouts/main.dtl" %}
 
 {% block head %}
+  <link href="/css/codemirror.css" rel="stylesheet" type="text/css" />
+  <script src="/js/codemirror.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/erlang.js" type="text/javascript" charset="utf-8"></script>
   <script src="/js/eval.js" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
 
@@ -12,7 +15,7 @@
 
 {% block main %}
   <form id='eval' action="/eval/exec" method="post" accept-charset="utf-8">
-    <textarea name="string" id= rows="8" cols="40"></textarea>
+    <textarea id='code' name='code'></textarea>
     <input type="submit" />
   </form>
 
