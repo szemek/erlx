@@ -169,6 +169,54 @@ false
 ## keymap(Fun, N, TupleList1) -> TupleList2
 
 ```erlang
-> lists:keymap(fun({FirstName, LastName}) -> FirstName end, 2, [{person, {"Alice", "Wonder"}}, {person, {"Bob", "Smith"}}]).
+> TupleList = [{person, {"Alice", "Wonder"}}, {person, {"Bob", "Smith"}}].
+> lists:keymap(fun({FirstName, LastName}) -> FirstName end, 2, TupleList).
 [{person,"Alice"},{person,"Bob"}]
+```
+
+## keymember(Key, N, TupleList) -> boolean()
+
+```erlang
+> lists:keymember(fruit, 1, [{fruit, banana}, {animal, fox}]).
+true
+
+> lists:keymember(thing, 1, [{fruit, banana}, {fruit, fox}]).
+false
+```
+
+## keymerge(N, TupleList1, TupleList2) -> TupleList3
+
+```erlang
+> lists:keymerge(1, [{fruit, banana}], [{fruit, apple}]).
+[{fruit,banana},{fruit,apple}]
+
+> lists:keymerge(2, [{fruit, banana}], [{fruit, apple}]).
+[{fruit,apple},{fruit,banana}]
+```
+
+## keyreplace(Key, N, TupleList1, NewTuple) -> TupleList2
+
+```erlang
+> lists:keyreplace(fruit, 1, [{fruit, banana}, {fruit, orange}], {fruit, apple}).
+[{fruit,apple},{fruit,orange}]
+```
+
+## keysearch(Key, N, TupleList) -> {value, Tuple} | false
+
+```erlang
+> lists:keysearch(strawberry, 1, [{fruit, banana}, {fruit, strawberry}]).
+false
+
+> lists:keysearch(strawberry, 2, [{fruit, banana}, {fruit, strawberry}]).
+{value,{fruit,strawberry}}
+```
+
+## keysort(N, TupleList1) -> TupleList2
+
+```erlang
+> lists:keysort(1, [{fruit, orange}, {animal, zebra}]).
+[{animal,zebra},{fruit,orange}]
+
+> lists:keysort(2, [{animal, zebra}, {fruit, orange}]).
+[{fruit,orange},{animal,zebra}]
 ```
