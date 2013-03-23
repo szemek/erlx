@@ -132,3 +132,43 @@ lists:filter(fun(X) -> X > 3 end, [0,1,2,3,4,5]).
 >lists:foldr(fun(Elem, AccIn) -> io:format("~p ", [Elem]), AccIn end, 0, [1,2,3]).
 3 2 1 0
 ```
+
+## foreach(Fun, List) -> ok
+
+```erlang
+> lists:foreach(fun(X) -> X end, [1,2,3]).
+ok
+
+> lists:foreach(fun(X) -> io:format(":: ~p~n", [X]) end, [1,2,3]).
+:: 1
+:: 2
+:: 3
+ok
+```
+
+## keydelete(Key, N, TupleList1) -> TupleList2
+
+```erlang
+> lists:keydelete(fruit, 1, [{fruit, banana}, {fruit, strawberry}]).
+[{fruit,strawberry}]
+
+> lists:keydelete(strawberry, 2, [{fruit, banana}, {fruit, strawberry}]).
+[{fruit,banana}]
+```
+
+## keyfind(Key, N, TupleList) -> Tuple | false
+
+```erlang
+> lists:keyfind(strawberry, 1, [{fruit, banana}, {fruit, strawberry}]).
+false
+
+> lists:keyfind(strawberry, 2, [{fruit, banana}, {fruit, strawberry}]).
+{fruit,strawberry}
+```
+
+## keymap(Fun, N, TupleList1) -> TupleList2
+
+```erlang
+> lists:keymap(fun({FirstName, LastName}) -> FirstName end, 2, [{person, {"Alice", "Wonder"}}, {person, {"Bob", "Smith"}}]).
+[{person,"Alice"},{person,"Bob"}]
+```
