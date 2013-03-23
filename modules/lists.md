@@ -85,3 +85,50 @@ lists:filter(fun(X) -> X > 3 end, [0,1,2,3,4,5]).
 > lists:flatlength([1,[1,[1,[1]]]]).
 4
 ```
+
+## flatmap(Fun, List1) -> List2
+
+```erlang
+> lists:flatmap(fun(X)->[X,X] end, [a,b,c]).
+[a,a,b,b,c,c]
+```
+
+## flatten(DeepList) -> List
+
+```erlang
+> lists:flatten([1,[1,[1,[1]]]]).
+[1,1,1,1]
+```
+
+## flatten(DeepList, Tail) -> List
+
+```erlang
+> lists:flatten([1,[1,[1,[1]]]], [2,3]).
+[1,1,1,1,2,3]
+```
+
+## foldl(Fun, Acc0, List) -> Acc1
+
+```erlang
+> lists:foldl(fun(X, Sum) -> X + Sum end, 0, [1,2,3,4,5]).
+15
+
+> lists:foldl(fun(X, Prod) -> X * Prod end, 1, [1,2,3,4,5]).
+120
+
+> lists:foldl(fun(Elem, AccIn) -> io:format("~p ", [Elem]), AccIn end, 0, [1,2,3]).
+1 2 3 0
+```
+
+## foldr(Fun, Acc0, List) -> Acc1
+
+```erlang
+> lists:foldr(fun(X, Sum) -> X + Sum end, 0, [1,2,3,4,5]).
+15
+
+> lists:foldr(fun(X, Prod) -> X * Prod end, 1, [1,2,3,4,5]).
+120
+
+>lists:foldr(fun(Elem, AccIn) -> io:format("~p ", [Elem]), AccIn end, 0, [1,2,3]).
+3 2 1 0
+```
